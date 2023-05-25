@@ -16,5 +16,11 @@ namespace student_manager
         {
             InitializeComponent();
         }
+
+        private void Login_Form_Load(object sender, EventArgs e)
+        {
+            // Coloca a imagem user.png na picture box da janela.
+            pictureBox1.Image = Image.FromFile("../../imagens/user.png");
+        }
     }
 }
