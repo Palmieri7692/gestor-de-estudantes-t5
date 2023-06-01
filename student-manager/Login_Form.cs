@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +22,20 @@ namespace student_manager
         {
             // Coloca a imagem user.png na picture box da janela.
             pictureBox1.Image = Image.FromFile("../../imagens/user.png");
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnEntrar_Click(object sender, EventArgs e)
+        {
+            MEU_BD bancoDeDados = new MEU_BD();
+
+            MySqlDataAdapter adaptador = new MySqlDataAdapter();
+            DataTable tabela = new DataTable();
+            MySqlCommand comando = new MySqlCommand("SELECT * FROM `usuarios` WHERE `nome_de_usuario` = @usn AND `senha` = @psw", bancoDeDados.getConexao);
         }
     }
 }
