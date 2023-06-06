@@ -4,17 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using System.Data; // eu digitei essa linha.
+using System.Data;
 
 namespace student_manager
 {
     internal class MEU_BD
     {
-        // "conexao" é o OBJETO que REPRESENTA a conexão com o
-        // banco de dados.
-        private MySqlConnection conexao = new MySqlConnection("datasource=localhost;username=root;password=;database=t5_sga_bd");
-
-        // Versão pública da variável/objeto "conexao".
+        // conexao é  objeto que representa a conexão com o banco de dados.
+        private MySqlConnection conexao = new MySqlConnection("datasource=localhost;username:root;password=;database=t5_sga_bd");
+        //versão publica da variavel/objeto "conexao"
         public MySqlConnection getConexao
         {
             get
@@ -22,9 +20,10 @@ namespace student_manager
                 return conexao;
             }
         }
+        // Método para abrir/omocoaçozar a coneão
+        public void abrirConexao()
 
-        // Método para ABRIR/INICIALIZAR a conexão.
-        public void abrirConexao() 
+
         {
             if (conexao.State == ConnectionState.Closed)
             {
@@ -32,8 +31,10 @@ namespace student_manager
             }
         }
 
-        // Método para FECHAR/ENCERAR a conexão.
+        // Método para abrir/omocoaçozar a coneão
         public void fecharConexao()
+
+
         {
             if (conexao.State == ConnectionState.Open)
             {
