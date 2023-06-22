@@ -24,12 +24,7 @@ namespace student_manager
             pictureBox1.Image = Image.FromFile("../../imagens/user.png");
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -38,21 +33,35 @@ namespace student_manager
         {
             MEU_BD bancoDeDados = new MEU_BD();
 
-            MySqlDataAdapter adaptator = new MySqlDataAdapter();
+            MySqlDataAdapter adaptador = new MySqlDataAdapter();
             DataTable tabela = new DataTable();
-            MySqlCommand comando = new MySqlCommand("SELECT * FROM `usuarios` WHERE `nome_de_usuario` = @usn AND `senha`= @psw", bancoDeDados.getConexao);
+            MySqlCommand comando = new MySqlCommand("SELECT * FROM `usuarios` WHERE `nome_de_usuario` = @usn AND `senha` = @psw", bancoDeDados.getConexao);
 
-            comando.Parameters.Add("@usn", MySqlDbType.VarChar).Value = txtUsuaria.Text;
-            comando.Parameters.Add("psw,", MySqlDbType.VarChar).Value = txtSenha.Text;
-            adaptator.SelectCommand = comando;
-            adaptator.Fill(tabela);
+            // Atualiza os valores dos parâmetros @usn e @psw, do comando acima.
+            comando.Parameters.Add("@usn", MySqlDbType.VarChar).Value = txtUsuario.Text;
+            comando.Parameters.Add("@psw", MySqlDbType.VarChar).Value = txtSenha.Text;
+
+            adaptador.SelectCommand = comando;
+
+            adaptador.Fill(tabela);
+
             if (tabela.Rows.Count > 0)
             {
-                MessageBox.Show("YES");
+                //MessageBox.Show("YES");
+                this.DialogResult = DialogResult.OK;
             }
+            else 
             {
-                MessageBox.Show("NO");
+                MessageBox.Show("Usuário ou senha inválidos", 
+                    "Erro de Login", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error);
             }
-        }   
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }
